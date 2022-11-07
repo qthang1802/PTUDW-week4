@@ -1,30 +1,5 @@
-function checkString(string){
-    return !(Number.isNaN(Number(string)))
 
-}
-
-
-function checkFirstNumber(){
-    const number = document.getElementById("firstNumber").value;
-    if(!checkString(number)){
-        document.getElementById("announce").innerHTML=' giá trị số thứ nhất không là số'
-
-    }
-
-
-
-}
-
-function checkSecondNumber(){
-    const number = document.getElementById("secondNumber").value;
-    if(!checkString(number)){
-        document.getElementById("announce").innerHTML='giá trị số thứ hai không là số'
-    }
-}
-
-
-
-function checkCalculation(){
+function selectCalculation(){
     if(document.getElementById("plus").checked==true){
         return 1;
     }
@@ -48,45 +23,73 @@ function checkCalculation(){
 
 
 function calculate(){
-    if(checkCalculation() ===1 ){
+    if(selectCalculation() ===1 ){
         document.getElementById("result").value =
             (parseFloat(document.getElementById("firstNumber").value)+ parseFloat(document.getElementById("secondNumber").value));
     }
-    else if(checkCalculation() ===2 ){
+    else if(selectCalculation() ===2 ){
         document.getElementById("result").value =
             (parseFloat(document.getElementById("firstNumber").value)- parseFloat(document.getElementById("secondNumber").value));
     }
 
-    else if(checkCalculation() ===3 ){
+    else if(selectCalculation() ===3 ){
         document.getElementById("result").value =
             (parseFloat(document.getElementById("firstNumber").value)* parseFloat(document.getElementById("secondNumber").value));
     }
     
 
-    else if(checkCalculation() ===4 ){
-        document.getElementById("result").value =
-            (parseFloat(document.getElementById("firstNumber").value)/ parseFloat(document.getElementById("secondNumber").value));
+    else if(selectCalculation() ===4 ){
+        
+        if(parseFloat(document.getElementById("secondNumber").value)!=0){
+        document.getElementById("result").value =(parseFloat(document.getElementById("firstNumber").value)/ parseFloat(document.getElementById("secondNumber").value));
+        }
+        else {
+            document.getElementById("result").value="Không chia được"
+        }
     }
 }
 
-function checkCalculation(){
+
+function checkString(_string){
+    return !(Number.isNaN(Number(_string)))
+
+}
+
+
+function checkFirstNumber(){
+    const firstNumber = document.getElementById("firstNumber").value;
+    if(!checkString(firstNumber)){
+        document.getElementById("announce").innerHTML=' giá trị số thứ nhất không là số'
+
+    }
+
+
+
+}
+
+function checkSecondNumber(){
+    const secondNumber = document.getElementById("secondNumber").value;
+    if(!checkString(secondNumber)){
+        document.getElementById("announce").innerHTML='giá trị số thứ hai không là số'
+    }
+}
+
+function check(){
+
     document.getElementById("announce").innerText="";
-    if(document.getElementById("firstNumber").value=="" || document.getElementById("secondNumber").value==""){
-        document.getElementById("announce").innerText=
-        "Chưa điền đủ hai số hợp lệ để tính";
+
+    if(document.getElementById("firstNumber").value==""|| document.getElementById("secondNumber").value=="")
+    document.getElementById("announce").innerHTML="Chưa điển đủ 2 số hợp lệ"
+
+    else if(selectCalculation() ==0){
+        document.getElementById("announce").innerHTML='hãy chọn phép tính'
     }
+}
 
-
-    else if(checkCalculation()==0)
-    document.getElementById("announce").innerHTML=
-        `<p>Bấm nút <span class="text-italic">Tính</span> mà chưa chọn phép tính</p>`;
-
-    else{
-        
-        calculate(parseFloat(document.getElementById("firstNumber").value),
-           parseFloat(document.getElementById("secondNumber").value));
-
-    }
+function Calculation(){
+    check()
+    calculate(parseFloat(document.getElementById("firstNumber").value),parseFloat(document.getElementById("secondNumber").value));
+    
 }
 
 
